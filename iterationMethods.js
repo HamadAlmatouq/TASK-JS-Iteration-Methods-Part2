@@ -23,28 +23,36 @@ function filterExpenseTransactions(transactions) {
 // 3) Write a `calculateTotalIncome` function that calculates the total income and returns it.
 function calculateTotalIncome(transactions) {
   // write your code here...
-  // return transactions.reduce(function (total, transaction) {
-  //   if (transaction[0] === "income") {
-  //     return total + transaction[1];
-  //   }
-  //   return total;
-  // }, 0);
 
-  const incomeTransactions = filterIncomeTransactions(transactions);
-  return (
-    incomeTransactions.reduce((total, transaction) => total + transaction[1]), 0
-  );
+  return transactions.reduce(function (total, transaction) {
+    if (transaction[0] === "income") {
+      return total + transaction[1];
+    }
+    return total;
+  }, 0);
 }
 
 // 4) Write a `calculateTotalExpenses` function that calculates the total expense and returns it.
 function calculateTotalExpenses(transactions) {
   // write your code here...
-  const expenseTransactions = filterExpenseTransactions(transactions);
 
-  return (
-    expenseTransactions.reduce((total, transaction) => total + transaction[1]),
-    0
-  );
+  const expenseTransactions = transactions.filter(function (transaction) {
+    return transaction[0] === "expense";
+  });
+  return expenseTransactions.reduce(function (total, transaction) {
+    return total + transaction[1];
+  }, 0);
+
+  // return (
+  //   expenseTransactions.reduce((total, transaction) => total + transaction[1]),
+  //   0
+  // );
+
+  // const incomeTransactions = filterIncomeTransactions(transactions);
+  // return incomeTransactions.reduce(
+  //   (total, transaction) => total + transaction[1],
+  //   0
+  // );
 }
 
 // 5) Write a `calculateNetTotal` function that calculates the net total (total income - total expenses) and returns it.
